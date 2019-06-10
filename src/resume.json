@@ -53,8 +53,7 @@
             "job": "Business Solutions Developer",
             "description": "Web Projects, plugins for existing platforms and web server management.",
             "stuff": [
-                "Develpment of the back end and front end of public websites from design templates",
-                "<a href=\"http://www.lneg.pt/\">http://www.lneg.pt/</a> e <a href=\"http://www.ces.pt/\">http://www.ces.pt/</a>",
+                "Develpment of the back end and front end of public websites from design templates.",
                 "Integration with the Portuguese Citezen Card authentication system.",
                 "Refactoring an internal CMS to use updated technologies.",
                 "Developed a small issues/tickets application from scratch in ASP.NET.",

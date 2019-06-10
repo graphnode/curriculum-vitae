@@ -1,8 +1,10 @@
-const { series, watch, task } = require('gulp');
+const { series, watch, task, src, dest } = require('gulp');
+const del = require('del');
 
 function clean(cb) {
-    // body omitted
-    cb();
+    del.sync('docs/**');
+
+    cb && cb();
 }
 
 function build(cb) {
@@ -18,15 +20,21 @@ function build(cb) {
         currentDate: () => moment().format('YYYY-MM-DD')
     };
 
-    view = Object.assign(view, require('./data/resume.json'));
+    let data = JSON.parse(fs.readFileSync('src/resume.json', 'utf8'));
 
-    let template = fs.readFileSync('templates/index.mustache', 'utf8');
+    view = Object.assign(view, data);
+
+    let template = fs.readFileSync('src/templates/index.mustache', 'utf8');
 
     let output = mustache.render(template, view);
 
-    fs.writeFileSync('index.html', output);
+    fs.mkdirSync('docs', { recursive: true });
 
-    cb();
+    fs.writeFileSync('docs/index.html', output);
+
+    src('src/assets/**/*').pipe(dest('docs/assets/'));
+
+    cb && cb();
 }
 
 function serve(cb) {
@@ -34,11 +42,15 @@ function serve(cb) {
     const app = express();
     const port = 3000;
     
-    app.use(express.static('.'));
+    app.use(express.static('docs'));
     app.listen(port, () => console.log(`Listening on port ${port}!`));
 
-    watch(['./assets/**/*', './data/**/*', './templates/**/*']).on("change", build);
+    watch(['./src/**/*']).on("change", (f) => {
+        console.log(`File changed: ${f}`);
+        build();
+    });
 }
 
 exports.build = build;
+exports.clean = clean;
 exports.default = series(clean, build, serve);

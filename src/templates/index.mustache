@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+        <title>{{name}} - {{job}}</title>
+
+        <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon" />
+        
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700italic,700,900italic,900&subset=latin,latin-ext" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+
+        <link rel="stylesheet" media="screen" href="assets/screen.css" />
+        <link rel="stylesheet" media="print" href="assets/print.css" />
+	</head>
+	<body>
+        <header>
+            <h1 class="fullName"><span class="firstName">{{firstName}}</span><span class="lastName">{{lastName}}</span></h1>
+            <h2 class="jobDescription">{{job}}<h2>
+            
+            <nav class="external-links">
+                <h1>External Links</h1>
+                <ul>
+                    <li><a href="mailto:{{{email}}}"><i class="fa fa-envelope-o"></i> {{email}}</a></li>
+                    <li><a href="{{{url}}}" target="_blank"><i class="fa fa-link"></i> {{url}}</a></li>
+                    <li><a href="https://github.com/graphnode" target="_blank"><i class="fa fa-github"></i> https://github.com/graphnode</a></li>
+                </ul>
+            </nav>
+
+            <nav class="section-links">
+                <h1>Sections</h1>
+                <ul>
+                    <li><a href="#experience"><span>Exp</span>erience</a></li>
+                    <li><a href="#education"><span>Edu</span>cation</a></li>
+                    <li><a href="#competencies"><span>Comp</span>etencies</a></li>
+                    <li><a href="#download"><span>Down</span>load</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <section>
+                <h1><a name="experience"><span>Exp</span>erience</a></h1>
+
+                {{#experience}}
+                <h2 class="time">{{when}}</h2>
+                <h3 class="subject logo {{company}}">{{company}}</h3>
+                <h4 class="location">{{location}}</h4>
+
+                <div class="content">
+                    <span class="description">{{job}}</span>
+                    {{^description}}<p>{{{description}}}</p>{{/description}}
+                    <ul>
+                        {{#stuff}}
+                        <li>{{{.}}}</li>
+                        {{/stuff}}
+                    </ul>
+                </div>
+                {{/experience}}
+            </section>
+
+            <section>
+                <h1><a name="education"><span>Edu</span>cation</a></h1>
+
+                {{#education}}
+                <h2 class="time">{{when}}</h2>
+                <h3 class="subject">{{description}}</h3>
+                <h4 class="location">{{where}}</h4>
+
+                <div class="content">
+                    {{#stuff}}
+                    <p>{{{.}}}</p>
+                    {{/stuff}}
+                </div>
+                {{/education}}
+            </section>
+
+            <section>
+                <h1><a name="competencies"><span>Comp</span>etencies</a></h1>
+                {{#competencies}}
+                <h2>{{area}}</h2>
+                {{#stuff}}
+                <p>{{{.}}}</p>
+                {{/stuff}}
+                {{/competencies}}
+            </section>
+            
+            <section>
+                <h1 class="print-hide"><a name="download"><span>Down</span>loads</a></h1>
+                <p class="print-hide">
+                    <a href="download/cv-dgomes-2016-03-14.en.pdf" target="_blank">PDF Format</a>
+                </p>
+            </section>
+        </main>
+
+        <footer class="print-hide">
+            <span>Last Update: {{currentDate}}</span>
+        </footer>
+    </body>
+</html>
