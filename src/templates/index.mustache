@@ -21,79 +21,84 @@
             <nav class="external-links">
                 <h1>External Links</h1>
                 <ul>
-                    <li><a href="mailto:{{{email}}}"><i class="fa fa-envelope-o"></i> {{email}}</a></li>
-                    <li><a href="{{{url}}}" target="_blank"><i class="fa fa-link"></i> {{url}}</a></li>
-                    <li><a href="https://github.com/graphnode" target="_blank"><i class="fa fa-github"></i> https://github.com/graphnode</a></li>
+                    {{#externalLinks}}
+                    <li><a href="{{{url}}}" target="_blank"><i class="fa fa-{{icon}}"></i> {{name}}</a></li>
+                    {{/externalLinks}}
                 </ul>
             </nav>
 
             <nav class="section-links">
                 <h1>Sections</h1>
                 <ul>
-                    <li><a href="#experience"><span>Exp</span>erience</a></li>
-                    <li><a href="#education"><span>Edu</span>cation</a></li>
-                    <li><a href="#competencies"><span>Comp</span>etencies</a></li>
-                    <li><a href="#download"><span>Down</span>load</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#education">Education</a></li>
+                    <li><a href="#competencies">Competencies</a></li>
+                    <li><a href="#download">Download</a></li>
                 </ul>
             </nav>
         </header>
 
         <main>
-            <section>
-                <h1><a name="experience"><span>Exp</span>erience</a></h1>
+            <section class="experience">
+                <h1><a name="experience">Experience</a></h1>
 
                 {{#experience}}
-                <h2 class="time">{{when}}</h2>
-                <h3 class="subject logo {{company}}">{{company}}</h3>
-                <h4 class="location">{{location}}</h4>
+                <div class="entry">
+                    <h2 class="time">{{when}}</h2>
+                    <h3 class="subject logo {{company}}">{{company}}</h3>
+                    <h4 class="location">{{location}}</h4>
 
-                <div class="content">
-                    <span class="description">{{job}}</span>
-                    {{^description}}<p>{{{description}}}</p>{{/description}}
-                    <ul>
-                        {{#stuff}}
-                        <li>{{{.}}}</li>
-                        {{/stuff}}
-                    </ul>
+                    <div class="content">
+                        <span class="description">{{job}}</span>
+                        {{^description}}<p>{{{description}}}</p>{{/description}}
+                        <ul>
+                            {{#stuff}}
+                            <li>{{{.}}}</li>
+                            {{/stuff}}
+                        </ul>
+                    </div>
                 </div>
                 {{/experience}}
             </section>
 
-            <section>
-                <h1><a name="education"><span>Edu</span>cation</a></h1>
+            <section class="education">
+                <h1><a name="education">Education</a></h1>
 
                 {{#education}}
-                <h2 class="time">{{when}}</h2>
-                <h3 class="subject">{{description}}</h3>
-                <h4 class="location">{{where}}</h4>
+                <div class="entry">
+                    <h2 class="time">{{when}}</h2>
+                    <h3 class="subject">{{description}}</h3>
+                    <h4 class="location">{{where}}</h4>
 
-                <div class="content">
-                    {{#stuff}}
-                    <p>{{{.}}}</p>
-                    {{/stuff}}
+                    <div class="content">
+                        {{#stuff}}
+                        <p>{{{.}}}</p>
+                        {{/stuff}}
+                    </div>
                 </div>
                 {{/education}}
             </section>
 
-            <section>
-                <h1><a name="competencies"><span>Comp</span>etencies</a></h1>
+            <section class="competencies">
+                <h1><a name="competencies">Competencies</a></h1>
+                
                 {{#competencies}}
-                <h2>{{area}}</h2>
-                {{#stuff}}
-                <p>{{{.}}}</p>
-                {{/stuff}}
+                <div class="entry">
+                    <h2>{{area}}</h2>
+                    {{#stuff}}
+                    <p>{{{.}}}</p>
+                    {{/stuff}}
+                </div>
                 {{/competencies}}
             </section>
             
-            <section>
-                <h1 class="print-hide"><a name="download"><span>Down</span>loads</a></h1>
-                <p class="print-hide">
-                    <a href="download/cv-dgomes-2016-03-14.en.pdf" target="_blank">PDF Format</a>
-                </p>
+            <section class="download">
+                <h1><a name="download">Downloads</a></h1>
+                <p><a href="download/cv-dgomes-2016-03-14.en.pdf" target="_blank">PDF Format</a></p>
             </section>
         </main>
 
-        <footer class="print-hide">
+        <footer>
             <span>Last Update: {{currentDate}}</span>
         </footer>
     </body>

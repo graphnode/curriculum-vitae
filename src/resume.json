@@ -1,8 +1,12 @@
 {
     "name": "Diogo Gomes",
-    "email": "diogo@gomes.xyz",
-    "url": "https://diogo.gomes.xyz",
     "job": "Software Developer",
+
+    "externalLinks": [
+        { "icon": "envelope-o", "name": "Email", "url": "mailto:diogo@gomes.xyz"},
+        { "icon": "github", "name": "Github", "url": "https://github.com/graphnode" },
+        { "icon": "link", "name": "Curriculum Vitae", "url": "https://diogo.gomes.xyz" }
+    ],
 
     "experience": [{
             "when": "01/2017 – Now",
@@ -10,10 +14,10 @@
             "company": "Axians",
             "job": "Senior Automation, Tools and Support Developer",
             "stuff": [
-                "Developed wallboards using Grafana.",
-                "Implemented data collectors in Node.js",
+                "Developed dashboards using Grafana.",
+                "Implemented data collectors in Node.js for dashboards.",
                 "Implemented automation flows in HP Operations Orchestrator.",
-                "Experimented with ESB using WSO2.",
+                "Developed flows using WSO2.",
                 "Scripts and Utilities in Node.js to manage automation tools.",
                 "Managing git repositories for automation team."
             ]
@@ -23,10 +27,9 @@
             "company": "Novabase",
             "job": "Automation, Tools and Support Developer",
             "stuff": [
-                "Developed wallboards using Smashing and Ruby.",
-                "Integrated it with multiple applications like Office 365, Sql Server, HPOO, BAO ServiceNow.",
-                "Created a Skype bot to connect between automation system and client.",
-                "Developed for ServiceNow",
+                "Developed wallboards using Smashing and Ruby and integrated it with multiple applications like Office 365, Sql Server, HPOO, BAO and ServiceNow.",
+                "Created a Skype bot for interaction between automation system and client.",
+                "Developed customizations for ServiceNow.",
                 "Client Portal in ServiceNow using Javascript, Angular and Bootstrap.",
                 "SOAP and REST web services using Javascript.",
                 "Implemented automation flows in HP Operations Orchestrator.",
