@@ -8,10 +8,15 @@ function clean(cb) {
 }
 
 function build(cb) {
-    const fs        = require('fs');
-    const mustache  = require('mustache');
-    const moment    = require('moment');
-    const sass      = require('sass');
+    const fs         = require('fs');
+    const handlebars = require('handlebars');
+    const moment     = require('moment');
+    const sass       = require('sass');
+    const showdown   = new (require('showdown')).Converter();
+    
+    handlebars.registerHelper('markdown', function(text) {
+        return showdown.makeHtml(text);
+    });
 
     fs.mkdirSync('docs', { recursive: true });
 
@@ -26,14 +31,17 @@ function build(cb) {
 
     view = Object.assign(view, data);
 
-    let template = fs.readFileSync('src/index.mustache', 'utf8');
-    fs.writeFileSync('docs/index.html', mustache.render(template, view));
+    let source = fs.readFileSync('src/index.handlebars', 'utf8');
+
+    let template = handlebars.compile(source);
+    let html = template(view);
+    fs.writeFileSync('docs/index.html', html);
 
     fs.mkdirSync('docs/styles', { recursive: true });
     fs.writeFileSync('docs/styles/screen.css', sass.renderSync({file: "src/styles/screen.scss"}).css);
     fs.writeFileSync('docs/styles/print.css', sass.renderSync({file: "src/styles/print.scss"}).css);
 
-    src(['src/**/*', '!src/**/*.mustache', '!src/**/*.scss', '!src/**/resume.json']).pipe(dest('docs/'));
+    src(['src/**/*', '!src/**/*.handlebars', '!src/**/*.scss', '!src/**/resume.json']).pipe(dest('docs/'));
 
     cb && cb();
 }

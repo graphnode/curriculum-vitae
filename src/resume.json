@@ -109,48 +109,48 @@
     "competencies": [{
             "area": "Web",
             "stuff": [
-                "Experience in the development of <strong>Single Page Applications</strong> using the the Angular.js framework, online interactive tools and the user of new technologies like <strong>WebSockets</strong>, <strong>WebGL</strong> and <strong>WebRTC</strong>.",
-                "Implementation of <strong>REST</strong> services (<strong>Node.js</strong> and <strong>ASP.NET WebAPI</strong>), public websites using the MVC architecture (<strong>ASP.NET MVC</strong>).",
-                "Deep knowledge in using transpilers like <strong>LESS</strong> and <strong>SASS/SCSS</strong> for CSS and <strong>Typescript</strong> for Javascript.",
-                "Capable to using <strong>mocha</strong> and addional libraries for unit testing, continuous integration using <strong>travis-ci</strong> and other tools for code coverage.",
-                "Basic knowledge in using <strong>Webpack</strong> and some knowledge in using <strong>Gulp</strong>."
+                "Experience in the development of **Single Page Applications** using the the Angular.js framework, online interactive tools and the user of new technologies like **WebSockets**, **WebGL** and **WebRTC**.",
+                "Implementation of **REST** services (**Node.js** and **ASP.NET WebAPI**), public websites using the MVC architecture (**ASP.NET MVC**).",
+                "Deep knowledge in using transpilers like **LESS** and **SASS/SCSS** for CSS and **Typescript** for Javascript.",
+                "Basic knowledge in using **Webpack** and some knowledge in using **Gulp**."
             ]
         }, {
             "area": "Desktop",
             "stuff": [
-                "Knowledge in the development of (or porting of web apps to) desktop applications using web tecnology using tools like <strong>NW.js</strong> and <strong>Electron</strong>.",
-                "Experience developing applications in <strong>C#</strong> and <strong>WinForms</strong>."
+                "Knowledge in the development of (or porting of web apps to) desktop applications using web tecnology using tools like **NW.js** and **Electron**.",
+                "Experience developing applications in **C#** and **WinForms**."
             ]
         }, {
             "area": "Mobile",
             "stuff": [
-                "Made prototypes with web technology using the <strong>Adobe PhoneGap</strong> framework.",
-                "Basic knowledge in the development of mobile applications for <strong>Android</strong> using <strong>Java</strong>."
+                "Made prototypes with web technology using the **Adobe PhoneGap** framework.",
+                "Basic knowledge in the development of mobile applications for **Android** using **Java**."
             ]
         }, {
             "area": "Development Workflows",
             "stuff": [
-                "A lot of experience using versioning control <strong>Git</strong> making some collaboration with open source on <strong>Github</strong>.",
-                "Personal use of <strong>TDD</strong> methodology and participated in <strong>SCRUM</strong> at work.",
+                "A lot of experience using versioning control **Git** making some collaboration with open source on **Github**.",
+                "Personal use of **TDD** methodology and participated in **SCRUM** at work.",
+                "Capable of doing unit testing, continuous integration using **travis-ci** for linux and **circleci** for windows.",
                 "Basic knowledge of TFS and SVN."
             ]
         }, {
             "area": "Databases",
             "stuff": [
-                "Experience in <strong>SQL</strong> and database management in <strong>Microsoft SQL Server</strong> and <strong>MySQL/MariaDB</strong>.",
-                "Implemented application that use <strong>NoSQL</strong> servers like <strong>MongoDB</strong>, <strong>RethinkDB</strong> and <strong>CouchDB</strong>."
+                "Experience in **SQL** and database management in **Microsoft SQL Server** and **MySQL/MariaDB**.",
+                "Implemented application that use **NoSQL** servers like **MongoDB**, **RethinkDB** and **CouchDB**."
             ]
         }, {
             "area": "Operating Systems",
             "stuff": [
-                "Server management in <strong>Linux</strong> (preferentially Debian/Ubuntu), <strong>Docker</strong> and basic knowledge of ZFS.",
-                "Mostly uses Microsoft <strong>Windows</strong> for day-to-day development and is capable of basic management of <strong>Windows Servers</strong> with <strong>IIS</strong>."
+                "Server management in **Linux** (preferentially Debian/Ubuntu), **Docker** and basic knowledge of ZFS.",
+                "Mostly uses Microsoft **Windows** for day-to-day development and is capable of basic management of **Windows Servers** with **IIS**."
             ]
         }, {
             "area": "Miscellaneous",
             "stuff": [
-                "Years of experience in using <strong>Visual Studio</strong>.",
-                "Deep experience in using editors like <strong>VSCode</strong>, <strong>Atom</strong>, <strong>Brackets</strong> and <strong>Eclipse</strong> for Java development.",
+                "Years of experience in using **Visual Studio**.",
+                "Deep experience in using editors like **VSCode**, **Atom**, **Brackets** and **Eclipse** for Java development.",
                 "Some knowledge in Unity3D development."
             ]
         }
