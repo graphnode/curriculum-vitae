@@ -8,10 +8,12 @@ function clean(cb) {
 }
 
 function build(cb) {
-    const util      = require('util');
     const fs        = require('fs');
     const mustache  = require('mustache');
     const moment    = require('moment');
+    const sass      = require('sass');
+
+    fs.mkdirSync('docs', { recursive: true });
 
     let view = {
         firstName: function() { return this.name.split(' ')[0]; },
@@ -24,15 +26,14 @@ function build(cb) {
 
     view = Object.assign(view, data);
 
-    let template = fs.readFileSync('src/templates/index.mustache', 'utf8');
+    let template = fs.readFileSync('src/index.mustache', 'utf8');
+    fs.writeFileSync('docs/index.html', mustache.render(template, view));
 
-    let output = mustache.render(template, view);
+    fs.mkdirSync('docs/styles', { recursive: true });
+    fs.writeFileSync('docs/styles/screen.css', sass.renderSync({file: "src/styles/screen.scss"}).css);
+    fs.writeFileSync('docs/styles/print.css', sass.renderSync({file: "src/styles/print.scss"}).css);
 
-    fs.mkdirSync('docs', { recursive: true });
-
-    fs.writeFileSync('docs/index.html', output);
-
-    src('src/assets/**/*').pipe(dest('docs/assets/'));
+    src(['src/**/*', '!src/**/*.mustache', '!src/**/*.scss', '!src/**/resume.json']).pipe(dest('docs/'));
 
     cb && cb();
 }
