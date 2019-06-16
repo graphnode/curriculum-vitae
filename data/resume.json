@@ -2,6 +2,7 @@
     "name": "Diogo Gomes",
     "email": "diogo@gomes.xyz",
     "url": "https://diogo.gomes.xyz",
+    "github": "https://github.com/graphnode",
     "job": "Software Developer",
 
     "experience": [{
@@ -131,6 +132,17 @@
                 "A lot of experience using versioning control <strong>Git</strong> making some collaboration with open source on <strong>Github</strong>.",
                 "Personal use of <strong>TDD</strong> methodology and participated in <strong>SCRUM</strong> at work.",
                 "Basic knowledge of TFS and SVN."
+            ]
+        }, {
+            "area": "IOT",
+            "stuff": [
+				"Experimented with Node-RED and REST API for IOT devices.",
+                "Developed code for <strong>ESP8266</strong> and <strong>Arduino</strong>."
+            ]
+        }, {
+            "area": "Machine Learning & AI",
+            "stuff": [
+                "Experimented with TensorFlow.js and ML.NET."
             ]
         }, {
             "area": "Databases",
