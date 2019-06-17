@@ -1,12 +1,11 @@
 const { series, watch, task } = require('gulp');
 
 function clean(cb) {
-    // body omitted
-    cb();
+    // Do nothing.
+    cb && cb();
 }
 
 function build(cb) {
-    const util      = require('util');
     const fs        = require('fs');
     const mustache  = require('mustache');
     const moment    = require('moment');
@@ -26,7 +25,7 @@ function build(cb) {
 
     fs.writeFileSync('index.html', output);
 
-    cb();
+    cb && cb();
 }
 
 function serve(cb) {
@@ -37,7 +36,7 @@ function serve(cb) {
     app.use(express.static('.'));
     app.listen(port, () => console.log(`Listening on port ${port}!`));
 
-    watch(['./assets/**/*', './data/**/*', './templates/**/*']).on("change", build);
+    watch(['./assets/**/*', './data/**/*', './templates/**/*']).on("change", () => build());
 }
 
 exports.build = build;

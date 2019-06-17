@@ -136,8 +136,7 @@
         }, {
             "area": "IOT",
             "stuff": [
-				"Experimented with Node-RED and REST API for IOT devices.",
-                "Developed code for <strong>ESP8266</strong> and <strong>Arduino</strong>."
+				"Experimented with Node-RED and REST and developed code for <strong>ESP8266</strong> and <strong>Arduino</strong>."
             ]
         }, {
             "area": "Machine Learning & AI",

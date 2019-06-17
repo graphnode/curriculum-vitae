@@ -26,54 +26,63 @@
             <main>
                 <h3><span>exp</span>erience</h3>
                 {{#experience}}
-                <div class="subheader">
-                    <span class="time">{{when}}</span><span class="subject logo {{company}}">{{company}}</span><span class="location">{{location}}</span>
-                </div>
-                <div class="content">
-                    <span class="description">{{job}}</span>
-                    {{^description}}<p>{{{description}}}</p>{{/description}}
-                    <ul>
-                        {{#stuff}}
-                        <li>{{{.}}}</li>
-                        {{/stuff}}
-                    </ul>
-                </div>
+                <section class="no-page-break">
+                    <div class="subheader">
+                        <span class="time">{{when}}</span><span class="subject logo {{company}}">{{company}}</span><span class="location">{{location}}</span>
+                    </div>
+                    <div class="content">
+                        <span class="description">{{job}}</span>
+                        {{^description}}<p>{{{description}}}</p>{{/description}}
+                        <ul>
+                            {{#stuff}}
+                            <li>{{{.}}}</li>
+                            {{/stuff}}
+                        </ul>
+                    </div>
+                </section>
                 {{/experience}}
 
                 <h3><span>edu</span>cation</h3>
                 {{#education}}
-                <div class="subheader">
-                    <span class="time">{{when}}</span><span class="subject">{{description}}</span>&nbsp;&nbsp;<span>({{where}})</span>
-                </div>
-                <div class="content">
-                    {{#stuff}}
-                    <p>{{{.}}}</p>
-                    {{/stuff}}
-                </div>
+                <section class="no-page-break">
+                    <div class="subheader">
+                        <span class="time">{{when}}</span><span class="subject">{{description}}</span>&nbsp;&nbsp;<span>({{where}})</span>
+                    </div>
+                    <div class="content">
+                        {{#stuff}}
+                        <p>{{{.}}}</p>
+                        {{/stuff}}
+                    </div>
+                </section>
                 {{/education}}
                 
                 <span class="page-break"></span>
 
-                <h3><span>comp</span>etencies</h3>
+                <h3 class="page-break"><span>comp</span>etencies</h3>
                 {{#competencies}}
-                <h4>{{area}}</h4>
-                {{#stuff}}
-                <p>{{{.}}}</p>
-                {{/stuff}}
+                <section class="no-page-break">
+                    <h4>{{area}}</h4>
+                    {{#stuff}}
+                    <p>{{{.}}}</p>
+                    {{/stuff}}
+                </section>
+                
 
                 {{/competencies}}
                
-                {{!
                 <h3 class="print-hide"><span>down</span>load</h3>
                 <p class="print-hide">
-                    <a href="http://cv.graphnode.com/download/cv-dgomes-2016-03-14.en.pdf" target="_blank">PDF Format</a>
+                    <a href="{{{url}}}/download/cv-dgomes-{{currentDate}}.pdf" target="_blank">PDF Format</a>
                 </p>
-                }}
             </main>
 
             <footer class="print-hide">
                 <span>Last Update: {{currentDate}}</span>
             </footer>
         </div>
-	
-</body></html>
+
+        <div class="print-footer">
+            <span class="left">{{{url}}}</span><span  class="middle">{{currentDate}}</span><span  class="right">{{name}}</span>
+        </div>
+    </body>
+</html>

@@ -272,6 +272,10 @@ footer {
     main h3, main h3:first-child {
         margin-top: 48px; 
     }
+
+    .print-footer {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 1024px) {
@@ -316,6 +320,22 @@ footer {
 }
 
 @media print {
+    .subject.logo {
+        display: inline;
+        background-image: none !important;
+        text-indent: 0;
+    }
+
+    main h3 span { 
+        color: #4D4D4D !important;
+        font-weight: 100;
+    }
+        
+    header {
+        color: #4D4D4D;
+        background-color: transparent;
+    }
+
     a {
         text-decoration: none;
     }
@@ -332,6 +352,12 @@ footer {
             margin: 0;
             padding: 10px 5px; 
         }
+
+    main .subheader {
+        margin-top: 25px;
+        page-break-inside: avoid;
+        page-break-after: avoid;
+    }
             
     .page {
         background-color: #FFFFFF;
@@ -341,13 +367,46 @@ footer {
     main {
         padding: 0 2cm 2cm 2cm;
     }
+
+    h1, h2, h3, h4 {
+        page-break-after: avoid;
+    }
+
+    .no-page-break {
+        page-break-inside: avoid;
+    }
     
     .page-break {
         page-break-before: always;
-        padding-top: 3cm;
+        page-break-inside: avoid;
     }
     
     .print-hide {
         display: none;
     }
+
+    .print-footer {
+        display: block;
+        position: fixed;
+        bottom: 0;
+        left: 0; right: 0;
+    }
+
+        .print-footer .left {
+            float: left;
+            width:33.33333%;
+            text-align:left;
+        }
+
+        .print-footer .middle {
+            float: left;
+            width:33.33333%;
+            text-align: center;
+        }
+
+        .print-footer .right {
+            float: right;
+            width:33.33333%;
+            text-align: right;
+        }
 }
