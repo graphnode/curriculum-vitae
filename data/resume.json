@@ -1,9 +1,13 @@
 {
     "name": "Diogo Gomes",
+    "job": "Software Developer",
+
     "email": "diogo@gomes.xyz",
+    
     "url": "https://diogo.gomes.xyz",
     "github": "https://github.com/graphnode",
-    "job": "Software Developer",
+    "linkedin": "https://www.linkedin.com/in/dgomes-gomes-xyz",
+
 
     "experience": [{
             "when": "01/2017 – Now",
@@ -25,17 +29,11 @@
             "job": "Automation, Tools and Support Developer",
             "stuff": [
                 "Developed wallboards using Smashing and Ruby.",
-                "Integrated it with multiple applications like Office 365, Sql Server, HPOO, BAO ServiceNow.",
+                "Integrated wallboards with multiple applications like Office 365, Sql Server, OO and ServiceNow.",
                 "Created a Skype bot to connect between automation system and client.",
-                "Developed for ServiceNow",
-                "Client Portal in ServiceNow using Javascript, Angular and Bootstrap.",
-                "SOAP and REST web services using Javascript.",
-                "Implemented automation flows in HP Operations Orchestrator.",
-                "Implemented business code in Javascript.",
-                "Implemented automation flows in BMC Atrium Orchestrator.",
-                "Implemented a new Java plugin to run Javascript code in flows.",
-                "Used XSLT and XPath for templating and logic code.",
-                "Scripts and Utilities in Node.js to manage automation tools.",
+                "Developed Client Portal in ServiceNow using Javascript, Angular and Bootstrap.",
+                "Implemented automation flows in Micro Focus Operations Orchestrator and BMC Atrium Orchestrator.",
+                "Scripts, Utilities and Web Services in Node.js to manage automation tools.",
                 "Managing git repositories for automation team."
             ]
         }, {
@@ -48,14 +46,14 @@
                 "Implemented output formatters for Office files in C# using OOXML."
             ]
         }, {
+            "class": "print-hide",
             "when": "2010 – 02/2016",
             "where": "Lisbon, Portugal",
             "company": "FlowOptions",
             "job": "Business Solutions Developer",
             "description": "Web Projects, plugins for existing platforms and web server management.",
             "stuff": [
-                "Develpment of the back end and front end of public websites from design templates",
-                "<a href=\"http://www.lneg.pt/\">http://www.lneg.pt/</a> e <a href=\"http://www.ces.pt/\">http://www.ces.pt/</a>",
+                "Development of the back end and front end of public websites from design templates",
                 "Integration with the Portuguese Citezen Card authentication system.",
                 "Refactoring an internal CMS to use updated technologies.",
                 "Developed a small issues/tickets application from scratch in ASP.NET.",
@@ -65,6 +63,7 @@
                 "Used Node.js to make utility scripts to export and manage data."
             ]
         }, {
+            "class": "print-hide",
             "when": "2010",
             "where": "Lisbon, Portugal",
             "company": "FlowOptions",
@@ -76,6 +75,7 @@
                 "Fixed security failure in the public website."
             ]
         }, {
+            "class": "print-hide",
             "when": "2008",
             "where": "Lourinhã, Portugal",
             "company": "LourInfor",
@@ -115,14 +115,10 @@
                 "Basic knowledge in using <strong>Webpack</strong> and some knowledge in using <strong>Gulp</strong>."
             ]
         }, {
-            "area": "Desktop",
+            "area": "Desktop and Mobile",
             "stuff": [
                 "Knowledge in the development of (or porting of web apps to) desktop applications using web tecnology using tools like <strong>NW.js</strong> and <strong>Electron</strong>.",
-                "Experience developing applications in <strong>C#</strong> and <strong>WinForms</strong>."
-            ]
-        }, {
-            "area": "Mobile",
-            "stuff": [
+                "Experience developing applications in <strong>C#</strong> and <strong>WinForms</strong>.",
                 "Made prototypes with web technology using the <strong>Adobe PhoneGap</strong> framework.",
                 "Basic knowledge in the development of mobile applications for <strong>Android</strong> using <strong>Java</strong>."
             ]
@@ -132,6 +128,13 @@
                 "A lot of experience using versioning control <strong>Git</strong> making some collaboration with open source on <strong>Github</strong>.",
                 "Personal use of <strong>TDD</strong> methodology and participated in <strong>SCRUM</strong> at work.",
                 "Basic knowledge of TFS and SVN."
+            ]
+        }, {
+            "area": "Cloud",
+            "stuff": [
+                "Worked with big cloud providers like <strong>AWS</strong>, <strong>GCP</strong> and <strong>Azure</strong> and smaller ones like <strong>DigitalOcean</strong> and <strong>Linode</strong>.",
+                "Used <strong>Terraform</strong> for infrastructure-as-code and experimented with <strong>Kubernetes</strong>.",
+                "Mantains a <strong>Docker</strong> infrastructure in a small home server."
             ]
         }, {
             "area": "IOT",

@@ -98,41 +98,6 @@ header {
         font-weight: 400;
     }
 
-    header .language-selector {
-        margin: 8px 0 0; padding: 0;
-        list-style: none;
-    }
-    
-        header .language-selector .language {
-            margin: 0; padding: 0;
-            list-style: none;
-            display: inline-block;
-            vertical-align: middle;
-            padding: 0 4px;
-        }
-        
-            header .language-selector .language img {
-                margin: 0; padding: 0;
-                vertical-align: middle;
-            }
-        
-        header .language-selector .language.selected {
-            background-color: #dfe0db;
-        }
-        
-        header .language-selector .language.selected a {
-            margin: 0; padding: 0;
-            background-color: #dfe0db;
-        }
-        
-        header .language-selector .language.selected a:hover {
-            background-color: #dfe0db;
-        }
-        
-        header .language-selector .language.selected img {
-            opacity: 0.8;
-        }
-
 subheader {
     display: block;
     margin: 10px auto;
@@ -142,12 +107,15 @@ subheader {
     subheader a {
         display: inline-block;
         outline: 1px solid #4D4D4D;
-        width: 240px;
         margin: 10px 5px;
-        padding: 10px 5px; 
+        padding: 10px; 
         white-space: nowrap;
         transition: all 0.2s ease;
     }
+
+        subheader a i{
+            margin-right: 4px;
+        }
     
     subheader a:first-child {
         margin-left: 0;
@@ -214,9 +182,9 @@ main {
             margin: 0;
         }
     
-    main ul li {
-        margin: 5px 0;
-    }
+        main ul li {
+            margin: 5px 0;
+        }
     
     main h4 {
         margin: 0; padding: 0;
@@ -237,6 +205,17 @@ main {
 footer {
     text-align: center;
     padding: 50px 0 20px;
+}
+
+.print-show {
+    display: none;
+}
+
+.more-entries {
+    text-align: center;
+    font-size: 80%;
+    color: #4D4D4D;
+    margin: 40px;
 }
 
 @media screen {
@@ -348,24 +327,27 @@ footer {
 
         subheader a {
             outline: none;
-            width: 240px;
             margin: 0;
             padding: 10px 5px; 
         }
 
     main .subheader {
         margin-top: 25px;
-        page-break-inside: avoid;
-        page-break-after: avoid;
     }
-            
+
+    main .subheader .time, main .subheader .subject, main .subheader .location {
+        text-align: left;
+        display: block;
+        float: none;
+    }
+
+    main .content {
+        margin-left: 0px;
+    }
+
     .page {
         background-color: #FFFFFF;
         background-image: none;
-    }
-    
-    main {
-        padding: 0 2cm 2cm 2cm;
     }
 
     h1, h2, h3, h4 {
@@ -383,6 +365,10 @@ footer {
     
     .print-hide {
         display: none;
+    }
+
+    .print-show {
+        display: block;
     }
 
     .print-footer {
