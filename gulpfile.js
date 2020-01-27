@@ -13,7 +13,7 @@ task('clean', async function() {
 });
 
 task('build:static', async function() {
-    return src('./static/**/*.*').pipe(dest('./dist/'));
+    return src('./static/**/*').pipe(dest('./dist/'));
 });
 
 task('build:pages', function() {
