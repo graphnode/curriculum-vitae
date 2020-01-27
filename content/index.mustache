@@ -1,88 +1,77 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>{{name}} - {{job}}</title>
-        <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700italic,700,900italic,900&subset=latin,latin-ext" />
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css" />
-        <link rel="stylesheet" href="css/main.css" />
-	</head>
-	<body>
-        <div class="page">
-            <header>
-                <h1 class="name">
-                    <span class="first">{{firstName}}</span><span class="last">{{lastName}}</span>
-                </h1>
-                <h2 class="description">{{job}}</h2>
-            </header>
-            
-            <subheader>
-                <a href="mailto:{{{email}}}"><i class="fas fa-envelope fa-fw"></i>{{email}}</a>
-                <a href="{{{url}}}" target="_blank"><i class="fa fa-id-badge fa-fw"></i>{{url}}</a>
-                <a href="{{{github}}}" target="_blank"><i class="fab fa-github-alt fa-fw"></i>{{github}}</a>
-                <a href="{{{linkedin}}}"target="_blank"><i class="fab fa-linkedin-in fa-fw"></i>{{linkedin}}</a>
-            </subheader>
-            
-            <main>
-                <h3><span>exp</span>erience</h3>
-                {{#experience}}
-                <section class="no-page-break {{class}}">
-                    <div class="subheader">
-                        <span class="time">{{when}}</span><span class="subject logo {{company}}">{{company}}</span><span class="location">{{where}}</span>
-                    </div>
-                    <div class="content">
-                        <span class="description">{{job}}</span>
-                        {{^description}}<p>{{{description}}}</p>{{/description}}
-                        <ul>
-                            {{#stuff}}
-                            <li>{{{.}}}</li>
-                            {{/stuff}}
-                        </ul>
-                    </div>
-                </section>
-                {{/experience}}
+{{> _header }}
 
-                <h3 class="print-hide"><span>edu</span>cation</h3>
-                {{#education}}
-                <section class="print-hide">
-                    <div class="subheader">
-                        <span class="time">{{when}}</span><span class="subject">{{description}}</span>&nbsp;&nbsp;<span>({{where}})</span>
-                    </div>
-                    <div class="content">
-                        {{#stuff}}
-                        <p>{{{.}}}</p>
-                        {{/stuff}}
-                    </div>
-                </section>
-                {{/education}}
+<header>
+    <h1 class="name">
+        <span class="first">{{firstName}}</span><span class="last">{{lastName}}</span>
+    </h1>
+    <h2 class="description">{{job}}</h2>
+</header>
 
-                <div class="more-entries print-show">Older experience and education entries were truncated.<br/>Please visit {{url}}.</div>
-                
-                <h3 class="page-break"><span>comp</span>etencies</h3>
-                {{#competencies}}
-                <section class="no-page-break">
-                    <h4>{{area}}</h4>
-                    {{#stuff}}
-                    <p>{{{.}}}</p>
-                    {{/stuff}}
-                </section>
-                
-                {{/competencies}}
-               
-                <h3 class="print-hide"><span>down</span>load</h3>
-                <p class="print-hide">
-                    <a href="download/cv-dgomes.pdf" target="_blank">PDF Format</a>
-                </p>
-            </main>
+<subheader>
+    <a href="mailto:{{{email}}}"><i class="fas fa-envelope fa-fw"></i>{{email}}</a>
+    <a href="{{{url}}}" target="_blank"><i class="fa fa-id-badge fa-fw"></i>{{url}}</a>
+    <a href="{{{github}}}" target="_blank"><i class="fab fa-github-alt fa-fw"></i>{{github}}</a>
+    <a href="{{{linkedin}}}"target="_blank"><i class="fab fa-linkedin-in fa-fw"></i>{{linkedin}}</a>
+</subheader>
 
-            <footer class="print-hide">
-                <span>Last Update: {{currentDate}}</span>
-            </footer>
+<main>
+    <h3><span>exp</span>erience</h3>
+    {{#experience}}
+    <section class="no-page-break {{class}}">
+        <div class="subheader">
+            <span class="time">{{when}}</span><span class="subject logo {{company}}">{{company}}</span><span class="location">{{where}}</span>
         </div>
-
-        <div class="print-footer">
-            <span class="left">{{{url}}}</span><span  class="middle">{{currentDate}}</span><span  class="right">{{name}}</span>
+        <div class="content">
+            <span class="description">{{job}}</span>
+            {{^description}}<p>{{{description}}}</p>{{/description}}
+            <ul>
+                {{#stuff}}
+                <li>{{{.}}}</li>
+                {{/stuff}}
+            </ul>
         </div>
-    </body>
-</html>
+    </section>
+    {{/experience}}
+
+    <h3 class="print-hide"><span>edu</span>cation</h3>
+    {{#education}}
+    <section class="print-hide">
+        <div class="subheader">
+            <span class="time">{{when}}</span><span class="subject">{{description}}</span>&nbsp;&nbsp;<span>({{where}})</span>
+        </div>
+        <div class="content">
+            {{#stuff}}
+            <p>{{{.}}}</p>
+            {{/stuff}}
+        </div>
+    </section>
+    {{/education}}
+
+    <div class="more-entries print-show">Older experience and education entries were truncated.<br/>Please visit {{url}}.</div>
+    
+    <h3 class="page-break"><span>comp</span>etencies</h3>
+    {{#competencies}}
+    <section class="no-page-break">
+        <h4>{{area}}</h4>
+        {{#stuff}}
+        <p>{{{.}}}</p>
+        {{/stuff}}
+    </section>
+    
+    {{/competencies}}
+    
+    <h3 class="print-hide"><span>down</span>load</h3>
+    <p class="print-hide">
+        <a href="download/cv-dgomes.pdf" target="_blank">PDF Format</a>
+    </p>
+</main>
+
+<footer class="print-hide">
+    <span>Last Update: {{currentDate}}</span>
+</footer>
+
+<div class="print-footer">
+    <span class="left">{{{url}}}</span><span  class="middle">{{currentDate}}</span><span  class="right">{{name}}</span>
+</div>
+    
+{{> _footer }}

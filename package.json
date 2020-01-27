@@ -13,9 +13,11 @@
   "license": "MIT",
   "devDependencies": {
     "browser-sync": "^2.26.7",
+    "chalk": "^3.0.0",
     "del": "^5.1.0",
     "gh-pages": "^2.2.0",
     "gulp": "^4.0.2",
+    "gulplog": "^1.0.0",
     "moment": "^2.24.0",
     "mustache": "^3.2.1",
     "puppeteer": "^1.20.0",

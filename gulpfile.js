@@ -1,5 +1,8 @@
 const fs = require('fs');
+const util = require('util');
 const { task, series, watch, src, dest } = require('gulp');
+const logger = require('gulplog');
+const chalk = require('chalk');
 const del = require('del');
 const moment = require('moment');
 const mustache  = require('mustache');
@@ -26,24 +29,37 @@ task('build:pages', function() {
 
     view = Object.assign(view, JSON.parse(fs.readFileSync('./data/resume.json')));
 
-    return src('./content/**/*.mustache')
+    let partialLoader = function(name) {
+        let parts = name.split(' ');
+        let template = fs.readFileSync(`./content/partials/${parts[0]}.mustache`, 'utf8');
+        let partialView = (parts.length > 1) ? view[parts[1]] : view; 
+        let html = mustache.render(template, partialView, partialLoader);
+        return html;
+    };
+
+    return src(['./content/**/*.mustache', '!./content/partials/**'])
         .pipe(through.obj((vinylFile, encoding, callback) => {
             var transformedFile = vinylFile.clone();
             transformedFile.extname = '.html';
-            transformedFile.contents = Buffer.from(mustache.render(vinylFile.contents.toString(encoding), view), encoding);
+
+            try {
+                let template = vinylFile.contents.toString(encoding);
+                let html = mustache.render(template, view, partialLoader);
+                transformedFile.contents = Buffer.from(html);
+            } catch (e) {
+                logger.error(chalk.red('Failed to parse template \'%s\', skipping.'), vinylFile.basename);
+                transformedFile.contents = Buffer.from(
+                    `<html><body style="margin: 64px">
+                        <div style="font-family: consolas; background: black; color: red; padding: 32px;">
+                            <h1>Failed to parse template '${vinylFile.basename}'</h1><pre>${e.stack}</pre>
+                        </div>
+                    </body></html>`
+                );
+            }
+
             return callback(null, transformedFile);
         }))
         .pipe(dest('./dist/'));
-
-        /*
-    let template = fs.readFileSync('./content/index.mustache', 'utf8');
-
-    let output = mustache.render(template, view);
-
-    fs.mkdirSync('./dist/', { recursive: true });
-    fs.writeFileSync('./dist/index.html', output);
-        
-    return Promise.resolve();*/
 });
 
 task('build', series('build:static', 'build:pages'));
