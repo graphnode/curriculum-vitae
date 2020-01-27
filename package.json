@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "gulp dev",
     "build": "gulp build",
-    "build-pdf": "gulp buildpdf"
+    "publish": "gulp publish"
   },
   "keywords": [],
   "author": "Diogo Gomes <diogo@gomes.xyz>",
