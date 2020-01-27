@@ -42,23 +42,23 @@ strong {
 }
 
 .subject.logo.Axians {
-    background-image: url("../assets/axians.png");
+    background-image: url("../img/axians.png");
 }
 
 .subject.logo.Novabase {
-    background-image: url("../assets/novabase.png");
+    background-image: url("../img/novabase.png");
 }
 
 .subject.logo.Rumos {
-    background-image: url("../assets/rumos.png");
+    background-image: url("../img/rumos.png");
 }
 
 .subject.logo.FlowOptions {
-    background-image: url("../assets/flowoptions.png");
+    background-image: url("../img/flowoptions.png");
 }
 
 .subject.logo.LourInfor {
-    background-image: url("../assets/lourinfor.png");
+    background-image: url("../img/lourinfor.png");
 }
 
 .page {
@@ -229,7 +229,7 @@ footer {
     }
     
     .page {
-        background: #fbfbfb url('../assets/blizzard.png');
+        background: #fbfbfb url('../img/blizzard.png');
         
         display: block;
         padding: 0; margin: 2cm auto;

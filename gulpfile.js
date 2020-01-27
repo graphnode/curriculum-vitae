@@ -1,17 +1,22 @@
 const fs = require('fs');
-const { series, watch, task } = require('gulp');
+const { task, series, watch, src, dest } = require('gulp');
 const del = require('del');
 const moment = require('moment');
+const mustache  = require('mustache');
+const browserSync = require('browser-sync');
+const through = require('through2');
 
-async function clean() {
-    const deletedPaths = await del(['index.html']);
-    console.log('Deleted files and directories:\n', deletedPaths.join('\n'));
-}
+task('clean', async function() {
+    return del([
+        './dist'
+    ]);
+});
 
-async function build() {
-    
-    const mustache  = require('mustache');
+task('build:static', async function() {
+    return src('./static/**/*.*').pipe(dest('./dist/'));
+});
 
+task('build:pages', function() {
     let view = {
         firstName: function() { return this.name.split(' ')[0]; },
         lastName: function() { return this.name.split(' ')[1]; },
@@ -19,16 +24,31 @@ async function build() {
         currentDate: () => moment().format('YYYY-MM-DD')
     };
 
-    view = Object.assign(view, require('./data/resume.json'));
+    view = Object.assign(view, JSON.parse(fs.readFileSync('./data/resume.json')));
 
-    let template = fs.readFileSync('templates/index.mustache', 'utf8');
+    return src('./content/**/*.mustache')
+        .pipe(through.obj((vinylFile, encoding, callback) => {
+            var transformedFile = vinylFile.clone();
+            transformedFile.extname = '.html';
+            transformedFile.contents = Buffer.from(mustache.render(vinylFile.contents.toString(encoding), view), encoding);
+            return callback(null, transformedFile);
+        }))
+        .pipe(dest('./dist/'));
+
+        /*
+    let template = fs.readFileSync('./content/index.mustache', 'utf8');
 
     let output = mustache.render(template, view);
 
-    fs.writeFileSync('index.html', output);
-}
+    fs.mkdirSync('./dist/', { recursive: true });
+    fs.writeFileSync('./dist/index.html', output);
+        
+    return Promise.resolve();*/
+});
 
-async function buildPdf() {
+task('build', series('build:static', 'build:pages'));
+
+task('build:pdf', async function() {
     const puppeteer = require('puppeteer');
 
     const browser = await puppeteer.launch({ headless: true });
@@ -43,22 +63,24 @@ async function buildPdf() {
 
     await browser.close();
     return pdf;
-}
+});
 
-async function serve() {
-    const express = require('express');
-    const app = express();
-    const port = 3000;
-    
-    app.use(express.static('.'));
-    app.listen(port, () => console.log(`Listening on port ${port}!`));
+task('serve', async function() {
+    let bs = browserSync.create();
 
-    watch(['./assets/**/*', './data/**/*', './templates/**/*']).on("change", () => build());
+    bs.init({
+        server: {
+            baseDir: "./dist"
+        }
+    });
+
+    watch(['./static/**/*']).on('change', series('build:static', bs.reload));
+    watch(['./data/**/*', './content/**/*']).on('change', series('build:pages', bs.reload));
 
     await new Promise(() => {});
-}
+});
 
-exports.clean = clean;
-exports.build = build;
-exports.buildpdf = buildPdf;
-exports.default = series(clean, build, serve);
+exports.clean = task('clean');
+exports.build = task('build');
+exports.generatePdf = task('build:pdf');
+exports.dev = series('clean', 'build', 'serve');

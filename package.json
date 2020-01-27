@@ -2,24 +2,23 @@
   "name": "curriculum-vitae",
   "private": true,
   "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
+  "description": "My curriculum vitae static website generator.",
   "scripts": {
-    "clean": "gulp clean",
-    "start": "gulp",
+    "dev": "gulp dev",
     "build": "gulp build",
-    "buildpdf": "gulp buildpdf"
+    "build-pdf": "gulp buildpdf"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Diogo Gomes <diogo@gomes.xyz>",
+  "license": "MIT",
   "devDependencies": {
-    "del": "^5.0.0",
-    "express": "^4.17.1",
+    "browser-sync": "^2.26.7",
+    "del": "^5.1.0",
     "gulp": "^4.0.2",
     "moment": "^2.24.0",
-    "mustache": "^3.0.1",
-    "puppeteer": "^1.18.1"
+    "mustache": "^3.2.1",
+    "puppeteer": "^1.20.0",
+    "through2": "^3.0.1"
   },
   "dependencies": {}
 }
