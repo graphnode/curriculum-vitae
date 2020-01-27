@@ -1,0 +1,77 @@
+body {
+    background: #dfe0db;
+    background: -moz-radial-gradient(center, ellipse cover, #dfe0db 0%, #a5a59d 100%);
+    background: -webkit-radial-gradient(center, ellipse cover, #dfe0db 0%,#a5a59d 100%);
+    background: radial-gradient(ellipse at center, #dfe0db 0%,#a5a59d 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dfe0db', endColorstr='#a5a59d',GradientType=1 );
+    background-attachment: fixed;
+}
+
+.page {
+    background: #fbfbfb url('../img/blizzard.png');
+    
+    display: block;
+    padding: 0; margin: 2cm auto;
+    max-width: 1024px;
+    
+    -webkit-box-shadow: -20px 45px 90px -5px rgba(0,0,0,0.67);
+    -moz-box-shadow: -20px 45px 90px -5px rgba(0,0,0,0.67);
+    box-shadow: -20px 45px 90px -5px rgba(0,0,0,0.67);
+}
+
+subheader a {
+    text-decoration: none;
+    
+    background-color: #e6e6e6;
+    color: #4D4D4D;
+    box-shadow: 3px 3px 0 0 #878787
+}
+
+main h3, main h3:first-child {
+    margin-top: 48px; 
+}
+
+.print-footer {
+    display: none;
+}
+
+@media (max-width: 1024px) {
+    .page {
+        margin: 0;
+    }
+}
+
+@media (max-width: 720px) {
+    main .subheader .time {
+        display: block;
+        text-align: left;
+        width: auto;
+    }
+    
+    main .subheader .subject {
+        display: block;
+    }
+    
+    main .subheader .location {
+        display: block;
+        float: none;
+    }
+    
+    main .content {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 540px) {
+    subheader {
+        margin: 10px 0;
+    }
+    subheader a {
+        margin: 5px 0;
+    }
+    
+    main {
+        text-align: left;
+    }
+}
