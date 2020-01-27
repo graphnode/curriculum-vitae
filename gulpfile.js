@@ -80,7 +80,13 @@ task('serve', async function() {
     await new Promise(() => {});
 });
 
+task('publish', function(cb) {
+    const ghpages = require('gh-pages');
+    ghpages.publish('dist', cb);
+});
+
 exports.clean = task('clean');
 exports.build = task('build');
-exports.generatePdf = task('build:pdf');
+exports.buildPdf = task('build:pdf');
 exports.dev = series('clean', 'build', 'serve');
+exports.publish = task('publish');
