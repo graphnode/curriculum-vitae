@@ -1,0 +1,105 @@
+@page {
+    size: A4;
+    margin: 0.8cm;
+}
+
+html {
+    zoom: 80%;
+}
+
+.subject.logo {
+    display: inline;
+    background-image: none !important;
+    text-indent: 0;
+}
+
+main h3 span { 
+    color: #4D4D4D !important;
+    font-weight: 100;
+}
+    
+header {
+    color: #4D4D4D;
+    background-color: transparent;
+}
+
+a {
+    text-decoration: none;
+}
+
+subheader {
+    margin: 0 auto 25px;
+    max-width: none;
+    border-bottom: 1px solid #4D4D4D;
+}
+
+    subheader a {
+        outline: none;
+        margin: 0;
+        padding: 10px 5px; 
+    }
+
+main .subheader {
+    margin-top: 25px;
+}
+
+main .subheader .time, main .subheader .subject, main .subheader .location {
+    text-align: left;
+    display: block;
+    float: none;
+}
+
+main .content {
+    margin-left: 0px;
+}
+
+.page {
+    background-color: #FFFFFF;
+    background-image: none;
+}
+
+h1, h2, h3, h4 {
+    page-break-after: avoid;
+}
+
+.no-page-break {
+    page-break-inside: avoid;
+}
+
+.page-break {
+    page-break-before: always;
+    page-break-inside: avoid;
+}
+
+.print-hide {
+    display: none;
+}
+
+.print-show {
+    display: block;
+}
+
+.print-footer {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    left: 0; right: 0;
+}
+
+    .print-footer .left {
+        float: left;
+        width:33.33333%;
+        text-align:left;
+    }
+
+    .print-footer .middle {
+        float: left;
+        width:33.33333%;
+        text-align: center;
+    }
+
+    .print-footer .right {
+        float: right;
+        width:33.33333%;
+        text-align: right;
+    }
