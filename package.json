@@ -18,6 +18,7 @@
     "gh-pages": "^2.2.0",
     "gulp": "^4.0.2",
     "gulplog": "^1.0.0",
+    "html-minifier": "^4.0.0",
     "moment": "^2.24.0",
     "mustache": "^3.2.1",
     "puppeteer": "^1.20.0",

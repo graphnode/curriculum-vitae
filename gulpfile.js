@@ -8,6 +8,7 @@ const moment = require('moment');
 const mustache  = require('mustache');
 const browserSync = require('browser-sync');
 const through = require('through2');
+const { minify } = require('html-minifier');
 
 task('clean', async function() {
     return del([
@@ -57,6 +58,21 @@ task('build:pages', function() {
                 );
             }
 
+            return callback(null, transformedFile);
+        }))
+        .pipe(through.obj((vinylFile, encoding, callback) => {
+            var transformedFile = vinylFile.clone();
+            try {
+                transformedFile.contents = Buffer.from(minify(vinylFile.contents.toString(encoding), {
+                    html5: true,
+                    removeRedundantAttributes: true,
+                    removeComments: true,
+                    collapseWhitespace: true
+                }))
+            } catch(e) {
+                logger.error(chalk.red('Failed to minify file \'%s\', skipping.'), vinylFile.basename);
+                transformedFile.contents = vinylFile.contents;
+            }
             return callback(null, transformedFile);
         }))
         .pipe(dest('./dist/'));
