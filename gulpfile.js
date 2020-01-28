@@ -158,7 +158,7 @@ async function runServer() {
     await new Promise(()=>{});
 }
 
-async function publish() {
+function publish(cb) {
     const ghpages = require('gh-pages');
     ghpages.publish(config.buildPath, cb);
 }
