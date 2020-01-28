@@ -8,35 +8,48 @@ const mustache  = require('mustache');
 const through = require('through2');
 const { minify } = require('html-minifier');
 
+const config = require('./config.json');
+
 async function clean() {
-    return del(['./dist']);
+    return del(config.buildPath);
 }
 
 async function buildStatic() {
-    return src('./static/**/*').pipe(dest('./dist/'));
+    return src(path.resolve(config.assetsPath, '**', '*')).pipe(dest(config.buildPath));
 }
 
+function cleanAndRequire(id) {
+    // Purge data cache and children, recursively.
+    const resolvedId = require.resolve(id);
+    const cachedIds = Object.keys(require.cache);
 
-function cleanRequireCache(entryModule) {
-    // Purge data cache and children. TODO: Recursive?
-    Object.keys(require.cache).filter(id => require.cache[id].parent && require.cache[id].parent.id === require.resolve('./data/index.js')).forEach((id) => delete require.cache[id]);
-    delete require.cache[require.resolve('./data/index.js')];
+    let toRemove = [resolvedId];
+    let count = 0;
+
+    while (toRemove.length !== 0) {
+        let currentId = toRemove.pop();
+        toRemove.push(...cachedIds.filter(m => require.cache[m] && require.cache[m].parent && require.cache[m].parent.id === currentId));
+        delete require.cache[currentId];
+        count++;
+    }
+
+    logger.info('Cleaned %s entries from cache.', chalk.magenta(count));
+
+    return require(id);
 }
 
 async function buildPages() {
-    cleanRequireCache('./data/index.js');
-
-    let view = require('./data/index.js');
+    const view = cleanAndRequire(path.resolve(config.dataPath, config.dataEntry));
 
     let partialLoader = function(name) {
         let parts = name.split(' ');
-        let template = fs.readFileSync(`./content/partials/${parts[0]}.mustache`, 'utf8');
+        let template = fs.readFileSync(path.resolve(config.pagesPartialsPath, `${parts[0]}.mustache`), 'utf8');
         let partialView = (parts.length > 1) ? view[parts[1]] : view; 
         let html = mustache.render(template, partialView, partialLoader);
         return html;
     };
 
-    return src(['./content/**/*.mustache', '!./content/partials/**'])
+    return src([config.pagesPath + '/**/*.mustache', '!' + config.pagesPartialsPath + '/**'])
         .pipe(through.obj((vinylFile, encoding, callback) => {
             var transformedFile = vinylFile.clone();
             transformedFile.extname = '.html';
@@ -73,19 +86,18 @@ async function buildPages() {
             }
             return callback(null, transformedFile);
         }))
-        .pipe(dest('./dist/'));
+        .pipe(dest(config.buildPath));
 }
 
 async function buildPdf() {
-    const path = require('path');
     const puppeteer = require('puppeteer');
 
     const browser = await puppeteer.launch({ headless: true });
     const page = await browser.newPage();
 
-    const downloadPath = path.join(__dirname, 'dist/download/cv-dgomes.pdf');
+    const downloadPath = path.resolve(config.buildPath, 'download/cv-dgomes.pdf');
 
-    await page.goto(`file://${path.join(__dirname, 'dist/index.html')}`, {waitUntil: 'networkidle0'});
+    await page.goto(`file://${path.resolve(config.buildPath, 'index.html')}`, {waitUntil: 'networkidle0'});
     
     let data = await page.pdf({ 
         format: 'A4',
@@ -105,16 +117,15 @@ async function devPdf() {
     const browser = await puppeteer.launch({ headless: true });
     const page = await browser.newPage();
 
-    const downloadPath = path.join(__dirname, 'dist/download/cv-dgomes.pdf');
+    const downloadPath = path.join(__dirname, config.buildPath, 'download/cv-dgomes.pdf');
 
     const generatePdf = async function() {
-        await page.goto(`file://${path.join(__dirname, 'dist/index.html')}`, {waitUntil: 'networkidle0'});
+        await page.goto(`file://${path.resolve(config.buildPath, 'index.html')}`, {waitUntil: 'networkidle0'});
         await page.setCacheEnabled(false);
         await page.reload({ waitUntil: ["networkidle0", "domcontentloaded"] })
     
-        const data = await page.pdf({ 
-            format: 'A4',
-            displayHeaderFooter: false
+        const data = await page.pdf({
+            format: 'A4'
         });
 
         await del(downloadPath);
@@ -124,9 +135,10 @@ async function devPdf() {
     };
 
     await generatePdf();
+    
 
-    watch(['./static/**/*']).on('change', series(buildStatic, generatePdf));
-    watch(['./data/**/*', './content/**/*']).on('change', series(buildPages, generatePdf));
+    watch([config.assetsPath + '/**/*']).on('change', series(buildStatic, generatePdf));
+    watch([config.dataPath + '/**/*', config.pagesPath + '/**/*']).on('change', series(buildPages, generatePdf));
 
     await new Promise(()=>{});
 }
@@ -136,24 +148,24 @@ async function runServer() {
 
     browserSync.init({
         server: {
-            baseDir: "./dist"
+            baseDir: config.buildPath
         }
     });
 
-    watch(['./static/**/*']).on('change', series(buildStatic, browserSync.reload));
-    watch(['./data/**/*', './content/**/*']).on('change', series(buildPages, browserSync.reload));
+    watch([config.assetsPath + '/**/*']).on('change', series(buildStatic, browserSync.reload));
+    watch([config.dataPath + '/**/*', config.pagesPath + '/**/*']).on('change', series(buildPages, browserSync.reload));
 
     await new Promise(()=>{});
 }
 
 async function publish() {
     const ghpages = require('gh-pages');
-    ghpages.publish('dist', cb);
+    ghpages.publish(config.buildPath, cb);
 }
 
 exports['clean'] = clean;
 exports['dev'] = series(clean, buildStatic, buildPages, runServer);
-exports['dev:pdf'] = series(clean, buildStatic, buildPages, devPdf);
+exports['dev:pdf'] = series(buildStatic, buildPages, devPdf);
 exports['build'] = series(clean, buildStatic, buildPages);
 exports['build:pdf'] = series(clean, buildStatic, buildPages, buildPdf);
 exports['publish'] = publish;

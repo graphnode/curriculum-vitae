@@ -1,0 +1,11 @@
+{
+    "pagesPath": "./pages",
+    "pagesPartialsPath": "./pages/partials",
+
+    "assetsPath": "./assets",
+
+    "dataPath": "./data",
+    "dataEntry": "index.js",
+
+    "buildPath": "./dist"
+}
