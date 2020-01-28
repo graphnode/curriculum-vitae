@@ -1,26 +1,22 @@
 const fs = require('fs');
-const util = require('util');
-const { task, series, watch, src, dest } = require('gulp');
+const { series, watch, src, dest } = require('gulp');
 const logger = require('gulplog');
 const chalk = require('chalk');
 const del = require('del');
 const moment = require('moment');
 const mustache  = require('mustache');
-const browserSync = require('browser-sync');
 const through = require('through2');
 const { minify } = require('html-minifier');
 
-task('clean', async function() {
-    return del([
-        './dist'
-    ]);
-});
+async function clean() {
+    return del(['./dist']);
+}
 
-task('build:static', async function() {
+async function buildStatic() {
     return src('./static/**/*').pipe(dest('./dist/'));
-});
+}
 
-task('build:pages', function() {
+async function buildPages() {
     let view = {
         firstName: function() { return this.name.split(' ')[0]; },
         lastName: function() { return this.name.split(' ')[1]; },
@@ -76,49 +72,86 @@ task('build:pages', function() {
             return callback(null, transformedFile);
         }))
         .pipe(dest('./dist/'));
-});
+}
 
-task('build', series('build:static', 'build:pages'));
-
-task('build:pdf', async function() {
+async function buildPdf() {
+    const path = require('path');
     const puppeteer = require('puppeteer');
 
     const browser = await puppeteer.launch({ headless: true });
     const page = await browser.newPage();
-    await page.goto('http://localhost:3000/', {waitUntil: 'networkidle0'});
-    const pdf = await page.pdf({ 
+
+    const downloadPath = path.join(__dirname, 'dist/download/cv-dgomes.pdf');
+
+    await page.goto(`file://${path.join(__dirname, 'dist/index.html')}`, {waitUntil: 'networkidle0'});
+    
+    let data = await page.pdf({ 
         format: 'A4',
         displayHeaderFooter: false
     });
 
-    fs.writeFileSync(`download/cv-dgomes-${moment().format('YYYY-MM-DD')}.pdf`, pdf);
+    fs.writeFileSync(downloadPath, data, null);
 
     await browser.close();
-    return pdf;
-});
+}
 
-task('serve', async function() {
-    let bs = browserSync.create();
+/* EXPERIMENTAL */
+async function devPdf() {
+    const path = require('path');
+    const puppeteer = require('puppeteer');
 
-    bs.init({
+    const browser = await puppeteer.launch({ headless: true });
+    const page = await browser.newPage();
+
+    const downloadPath = path.join(__dirname, 'dist/download/cv-dgomes.pdf');
+
+    const generatePdf = async function() {
+        await page.goto(`file://${path.join(__dirname, 'dist/index.html')}`, {waitUntil: 'networkidle0'});
+        await page.setCacheEnabled(false);
+        await page.reload({ waitUntil: ["networkidle0", "domcontentloaded"] })
+    
+        const data = await page.pdf({ 
+            format: 'A4',
+            displayHeaderFooter: false
+        });
+
+        await del(downloadPath);
+
+        fs.writeFileSync(downloadPath, data, null);
+        logger.info(chalk.blue('Generated PDF.'));
+    };
+
+    await generatePdf();
+
+    watch(['./static/**/*']).on('change', series(buildStatic, generatePdf));
+    watch(['./data/**/*', './content/**/*']).on('change', series(buildPages, generatePdf));
+
+    await new Promise(()=>{});
+}
+
+async function runServer() {
+    const browserSync = require('browser-sync').create();
+
+    browserSync.init({
         server: {
             baseDir: "./dist"
         }
     });
 
-    watch(['./static/**/*']).on('change', series('build:static', bs.reload));
-    watch(['./data/**/*', './content/**/*']).on('change', series('build:pages', bs.reload));
+    watch(['./static/**/*']).on('change', series(buildStatic, browserSync.reload));
+    watch(['./data/**/*', './content/**/*']).on('change', series(buildPages, browserSync.reload));
 
-    await new Promise(() => {});
-});
+    await new Promise(()=>{});
+}
 
-task('publish', function(cb) {
+async function publish() {
     const ghpages = require('gh-pages');
     ghpages.publish('dist', cb);
-});
+}
 
-exports.clean = task('clean');
-exports.build = task('build');
-exports.buildPdf = task('build:pdf');
-exports.dev = series('clean', 'build', 'serve');
-exports.publish = task('publish');
+exports['clean'] = clean;
+exports['dev'] = series(clean, buildStatic, buildPages, runServer);
+exports['dev:pdf'] = series(clean, buildStatic, buildPages, devPdf);
+exports['build'] = series(clean, buildStatic, buildPages);
+exports['build:pdf'] = series(clean, buildStatic, buildPages, buildPdf);
+exports['publish'] = publish;

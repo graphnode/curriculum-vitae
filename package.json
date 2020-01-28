@@ -4,8 +4,10 @@
   "version": "1.0.0",
   "description": "My curriculum vitae static website generator.",
   "scripts": {
+    "clean": "gulp clean",
     "dev": "gulp dev",
     "build": "gulp build",
+    "build:pdf": "gulp build:pdf",
     "publish": "gulp publish"
   },
   "keywords": [],
