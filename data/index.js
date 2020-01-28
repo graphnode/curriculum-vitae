@@ -1,12 +1,19 @@
-{
+const moment = require('moment');
+
+module.exports = {
     "name": "Diogo Gomes",
+    firstName: function() { return this.name.split(' ')[0]; },
+    lastName: function() { return this.name.split(' ')[1]; },
+
     "job": "Software Developer",
 
     "email": "diogo@gomes.xyz",
-    
+
     "url": "https://diogo.gomes.xyz",
     "github": "https://github.com/graphnode",
     "linkedin": "https://www.linkedin.com/in/dgomes-gomes-xyz",
+
+    currentDate: () => moment().format('YYYY-MM-DD'),
 
     "experience": [{
             "when": "01/2017 – Now",
@@ -166,4 +173,4 @@
             ]
         }
     ]
-}
+};

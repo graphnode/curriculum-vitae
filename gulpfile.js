@@ -1,9 +1,9 @@
 const fs = require('fs');
+const path = require('path');
 const { series, watch, src, dest } = require('gulp');
 const logger = require('gulplog');
 const chalk = require('chalk');
 const del = require('del');
-const moment = require('moment');
 const mustache  = require('mustache');
 const through = require('through2');
 const { minify } = require('html-minifier');
@@ -16,15 +16,17 @@ async function buildStatic() {
     return src('./static/**/*').pipe(dest('./dist/'));
 }
 
+
+function cleanRequireCache(entryModule) {
+    // Purge data cache and children. TODO: Recursive?
+    Object.keys(require.cache).filter(id => require.cache[id].parent && require.cache[id].parent.id === require.resolve('./data/index.js')).forEach((id) => delete require.cache[id]);
+    delete require.cache[require.resolve('./data/index.js')];
+}
+
 async function buildPages() {
-    let view = {
-        firstName: function() { return this.name.split(' ')[0]; },
-        lastName: function() { return this.name.split(' ')[1]; },
+    cleanRequireCache('./data/index.js');
 
-        currentDate: () => moment().format('YYYY-MM-DD')
-    };
-
-    view = Object.assign(view, JSON.parse(fs.readFileSync('./data/resume.json')));
+    let view = require('./data/index.js');
 
     let partialLoader = function(name) {
         let parts = name.split(' ');
