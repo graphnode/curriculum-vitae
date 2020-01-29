@@ -159,8 +159,12 @@ async function runServer() {
 }
 
 function publish(cb) {
+    const moment = require('moment');
     const ghpages = require('gh-pages');
-    ghpages.publish(config.buildPath, cb);
+    
+    ghpages.publish(config.buildPath, {
+        message: `Published version ${moment().format('YYYY-MM-DD')}`,
+    }, cb);
 }
 
 exports['clean'] = clean;
