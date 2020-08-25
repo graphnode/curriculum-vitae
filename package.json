@@ -14,19 +14,19 @@
   "author": "Diogo Gomes <diogo@gomes.xyz>",
   "license": "MIT",
   "devDependencies": {
-    "browser-sync": "^2.26.7",
+    "browser-sync": "^2.26.12",
     "chalk": "^3.0.0",
     "del": "^5.1.0",
     "gh-pages": "^2.2.0",
     "gulp": "^4.0.2",
-    "gulp-sass": "^4.0.2",
+    "gulp-sass": "^4.1.0",
     "gulplog": "^1.0.0",
     "html-minifier": "^4.0.0",
-    "moment": "^2.24.0",
-    "mustache": "^4.0.0",
-    "node-sass": "^4.13.1",
-    "puppeteer": "^2.1.0",
-    "through2": "^3.0.1"
+    "moment": "^2.27.0",
+    "mustache": "^4.0.1",
+    "node-sass": "^4.14.1",
+    "puppeteer": "^2.1.1",
+    "through2": "^3.0.2"
   },
   "dependencies": {},
   "engines": {
