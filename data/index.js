@@ -15,7 +15,19 @@ module.exports = {
 
     currentDate: () => moment().format('YYYY-MM-DD'),
 
-    "experience": [{
+    "experience": [
+        {
+            "when": "03/2020 – Now",
+            "where": "Lisbon, Portugal",
+            "company": "Millenium (Project)",
+            "job": "Senior Software Developer",
+            "stuff": [
+                "Developed React Native components following Atomic Design System.",
+                "Created documentation, proof of concept and component playground in Storybook.",
+                "Did proof of concept with React Native Web for web documentation of React Native components.",
+                "Managed development tasks for programming team and general project management at programming level."
+            ]
+        },{
             "when": "01/2017 – Now",
             "where": "Lisbon, Portugal",
             "company": "Axians",
@@ -24,7 +36,6 @@ module.exports = {
                 "Developed wallboards using Grafana.",
                 "Implemented data collectors in Node.js",
                 "Implemented automation flows in HP Operations Orchestrator.",
-                "Experimented with ESB using WSO2.",
                 "Scripts and Utilities in Node.js to manage automation tools.",
                 "Managing git repositories for automation team."
             ]
@@ -35,12 +46,9 @@ module.exports = {
             "job": "Automation, Tools and Support Developer",
             "stuff": [
                 "Developed wallboards using Smashing and Ruby.",
-                "Integrated wallboards with multiple applications like Office 365, Sql Server, OO and ServiceNow.",
                 "Created a Skype bot to connect between automation system and client.",
                 "Developed Client Portal in ServiceNow using Javascript, Angular and Bootstrap.",
-                "Implemented automation flows in Micro Focus Operations Orchestrator and BMC Atrium Orchestrator.",
-                "Scripts, Utilities and Web Services in Node.js to manage automation tools.",
-                "Managing git repositories for automation team."
+                "Scripts, Utilities and Web Services in Node.js to manage automation tools."
             ]
         }, {
             "when": "02/2016 – 04/2016",
@@ -123,10 +131,10 @@ module.exports = {
         }, {
             "area": "Desktop and Mobile",
             "stuff": [
+                "Developed components in <strong>React Native</strong> using <strong>Storybook</strong> and <strong>Styled Components</strong>.",
+                "Organized design system tokens using <strong>Style Dictionary</strong>.",
                 "Knowledge in the development of (or porting of web apps to) desktop applications using web tecnology using tools like <strong>NW.js</strong> and <strong>Electron</strong>.",
-                "Experience developing applications in <strong>C#</strong> and <strong>WinForms</strong>.",
-                "Made prototypes with web technology using the <strong>Adobe PhoneGap</strong> framework.",
-                "Basic knowledge in the development of mobile applications for <strong>Android</strong> using <strong>Java</strong>."
+                "Experience developing applications in <strong>C#</strong> and <strong>WinForms</strong>."
             ]
         }, {
             "area": "Development Workflows",

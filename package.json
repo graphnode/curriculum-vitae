@@ -28,5 +28,8 @@
     "puppeteer": "^2.1.0",
     "through2": "^3.0.1"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "engines": {
+    "node": ">=12.14.1"
+  }
 }

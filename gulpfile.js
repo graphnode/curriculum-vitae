@@ -14,7 +14,7 @@ async function clean() {
     return del(config.buildPath);
 }
 
-async function buildStatic() {
+async function buildAssets() {
     return src(path.resolve(config.assetsPath, '**', '*')).pipe(dest(config.buildPath));
 }
 
@@ -136,8 +136,7 @@ async function devPdf() {
 
     await generatePdf();
     
-
-    watch([config.assetsPath + '/**/*']).on('change', series(buildStatic, generatePdf));
+    watch([config.assetsPath + '/**/*']).on('change', series(buildAssets, generatePdf));
     watch([config.dataPath + '/**/*', config.pagesPath + '/**/*']).on('change', series(buildPages, generatePdf));
 
     await new Promise(()=>{});
@@ -152,7 +151,7 @@ async function runServer() {
         }
     });
 
-    watch([config.assetsPath + '/**/*']).on('change', series(buildStatic, browserSync.reload));
+    watch([config.assetsPath + '/**/*']).on('change', series(buildAssets, browserSync.reload));
     watch([config.dataPath + '/**/*', config.pagesPath + '/**/*']).on('change', series(buildPages, browserSync.reload));
 
     await new Promise(()=>{});
@@ -168,8 +167,8 @@ function publish(cb) {
 }
 
 exports['clean'] = clean;
-exports['dev'] = series(clean, buildStatic, buildPages, runServer);
-exports['dev:pdf'] = series(buildStatic, buildPages, devPdf);
-exports['build'] = series(clean, buildStatic, buildPages);
-exports['build:pdf'] = series(clean, buildStatic, buildPages, buildPdf);
+exports['dev'] = series(clean, buildAssets, buildPages, runServer);
+exports['dev:pdf'] = series(buildAssets, buildPages, devPdf);
+exports['build'] = series(clean, buildAssets, buildPages);
+exports['build:pdf'] = series(clean, buildAssets, buildPages, buildPdf);
 exports['publish'] = publish;
