@@ -19,7 +19,7 @@ module.exports = {
         {
             "when": "03/2020 – Now",
             "where": "Lisbon, Portugal",
-            "company": "Millenium (Project)",
+            "company": "Millennium (Project)",
             "job": "Senior Software Developer",
             "stuff": [
                 "Developed React Native components following Atomic Design System.",
