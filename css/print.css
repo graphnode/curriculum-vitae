@@ -49,6 +49,10 @@ main .subheader .time, main .subheader .subject, main .subheader .location {
     float: none;
 }
 
+main .subheader .subject.logo {
+    width: auto;
+}
+
 main .content {
     margin-left: 0px;
 }
