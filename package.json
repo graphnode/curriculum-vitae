@@ -22,7 +22,7 @@
     "gulp-sass": "^4.1.0",
     "gulplog": "^1.0.0",
     "html-minifier": "^4.0.0",
-    "moment": "^2.27.0",
+    "moment": "^2.29.4",
     "mustache": "^4.0.1",
     "node-sass": "^4.14.1",
     "puppeteer": "^2.1.1",
