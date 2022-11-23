@@ -14,7 +14,7 @@
   "author": "Diogo Gomes <diogo@gomes.xyz>",
   "license": "MIT",
   "devDependencies": {
-    "browser-sync": "^2.26.12",
+    "browser-sync": "^2.27.10",
     "chalk": "^3.0.0",
     "del": "^5.1.0",
     "gh-pages": "^2.2.0",
